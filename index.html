@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noesis - Share Your Moments</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #fafafa;
+            color: #262626;
+            max-width: 600px;
+            margin: 0 auto;
+            border: 1px solid #dbdbdb;
+            height: 100vh;
+            position: relative;
+            padding-bottom: 60px;
+        }
+        
+        /* Header Styles */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            border-bottom: 1px solid #dbdbdb;
+            background-color: white;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 600;
+            color: #262626;
+            text-decoration: none;
+        }
+        
+        .header-icons {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .header-icons i {
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Main Content */
+        .stories {
+            display: flex;
+            padding: 16px;
+            gap: 16px;
+            overflow-x: auto;
+            background-color: white;
+            border-bottom: 1px solid #dbdbdb;
+        }
+        
+        .story {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .story-avatar {
+            width: 66px;
+            height: 66px;
+            border-radius: 50%;
+            padding: 2px;
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+        }
+        
+        .story-avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid white;
+            object-fit: cover;
+        }
+        
+        .story-username {
+            font-size: 12px;
+            max-width: 66px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        /* Posts */
+        .posts {
+            margin-bottom: 60px;
+        }
+        
+        .post {
+            margin-bottom: 20px;
+            background-color: white;
+            border: 1px solid #dbdbdb;
+        }
+        
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+        }
+        
+        .post-user {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .post-user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+        
+        .post-user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .post-username {
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .post-more {
+            font-weight: bold;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        
+        .post-image {
+            width: 100%;
+            aspect-ratio: 1/1;
+        }
+        
+        .post-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .post-actions {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 16px;
+        }
+        
+        .post-actions-left {
+            display: flex;
+            gap: 16px;
+        }
+        
+        .post-actions i {
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .post-likes {
+            padding: 0 16px;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        
+        .post-caption {
+            padding: 0 16px;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        
+        .post-caption-username {
+            font-weight: 600;
+            margin-right: 4px;
+        }
+        
+        .post-comments {
+            padding: 0 16px;
+            color: #8e8e8e;
+            font-size: 14px;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+        
+        .post-time {
+            padding: 0 16px;
+            color: #8e8e8e;
+            font-size: 10px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            border-top: 1px solid #dbdbdb;
+        }
+        
+        .bottom-nav i {
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Login/Signup Page */
+        .auth-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            padding: 0 40px;
+            background-color: white;
+        }
+        
+        .auth-box {
+            width: 100%;
+            max-width: 350px;
+            border: 1px solid #dbdbdb;
+            padding: 20px 40px;
+            text-align: center;
+        }
+        
+        .auth-logo {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .auth-input {
+            padding: 10px;
+            background-color: #fafafa;
+            border: 1px solid #dbdbdb;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+        
+        .auth-button {
+            padding: 8px;
+            background-color: #0095f6;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+        
+        .auth-divider {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            color: #8e8e8e;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        
+        .auth-divider::before,
+        .auth-divider::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid #dbdbdb;
+            margin: 0 10px;
+        }
+        
+        .auth-switch {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #dbdbdb;
+            width: 100%;
+            max-width: 350px;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        .auth-link {
+            color: #0095f6;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        
+        /* Profile Page */
+        .profile-container {
+            display: none;
+            margin-bottom: 60px;
+        }
+        
+        .profile-header {
+            padding: 16px;
+            position: relative;
+        }
+        
+        .profile-settings {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        
+        .profile-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+        
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .profile-stats {
+            display: flex;
+            gap: 20px;
+            text-align: center;
+        }
+        
+        .profile-stat {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .profile-stat-count {
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        .profile-stat-label {
+            font-size: 14px;
+        }
+        
+        .profile-bio {
+            margin-bottom: 16px;
+        }
+        
+        .profile-name {
+            font-weight: 600;
+        }
+        
+        .profile-highlights {
+            display: flex;
+            gap: 16px;
+            padding: 16px 0;
+            overflow-x: auto;
+        }
+        
+        .highlight {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .highlight-avatar {
+            width: 66px;
+            height: 66px;
+            border-radius: 50%;
+            padding: 2px;
+            background: #fafafa;
+            border: 1px solid #dbdbdb;
+        }
+        
+        .highlight-avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .highlight-name {
+            font-size: 12px;
+            max-width: 66px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        .profile-tabs {
+            display: flex;
+            border-top: 1px solid #dbdbdb;
+        }
+        
+        .profile-tab {
+            flex: 1;
+            text-align: center;
+            padding: 16px 0;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #8e8e8e;
+            cursor: pointer;
+        }
+        
+        .profile-tab.active {
+            color: #262626;
+            border-top: 1px solid #262626;
+            margin-top: -1px;
+        }
+        
+        .profile-posts {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+        }
+        
+        .profile-post {
+            aspect-ratio: 1/1;
+            overflow: hidden;
+        }
+        
+        .profile-post img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Notifications Page */
+        .notifications-container {
+            display: none;
+            margin-bottom: 60px;
+        }
+        
+        .notification {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            background-color: white;
+            border-bottom: 1px solid #dbdbdb;
+        }
+        
+        .notification-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 12px;
+        }
+        
+        .notification-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .notification-content {
+            flex: 1;
+            font-size: 14px;
+        }
+        
+        .notification-time {
+            color: #8e8e8e;
+            font-size: 12px;
+            margin-top: 2px;
+        }
+        
+        .notification-follow {
+            background-color: #0095f6;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 6px 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .suggestions-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            background-color: white;
+            border-bottom: 1px solid #dbdbdb;
+        }
+        
+        .suggestions-title {
+            font-weight: 600;
+            color: #8e8e8e;
+        }
+        
+        .suggestions-see-all {
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        /* Reels Page */
+        .reels-container {
+            display: none;
+            margin-bottom: 60px;
+        }
+        
+        .reel {
+            position: relative;
+            height: calc(100vh - 120px);
+            background-color: black;
+        }
+        
+        .reel-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .reel-sidebar {
+            position: absolute;
+            right: 10px;
+            bottom: 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .reel-action {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+        }
+        
+        .reel-action i {
+            font-size: 28px;
+            margin-bottom: 4px;
+        }
+        
+        .reel-action-count {
+            font-size: 12px;
+        }
+        
+        .reel-user {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .reel-user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid white;
+            overflow: hidden;
+            margin-bottom: 4px;
+        }
+        
+        .reel-user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .reel-info {
+            position: absolute;
+            bottom: 20px;
+            left: 10px;
+            color: white;
+            max-width: 80%;
+        }
+        
+        .reel-username {
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .reel-music {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        
+        .reel-music i {
+            margin-right: 8px;
+        }
+        
+        /* Messages Page */
+        .messages-container {
+            display: none;
+            margin-bottom: 60px;
+        }
+        
+        .messages-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            background-color: white;
+            border-bottom: 1px solid #dbdbdb;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        .messages-title {
+            font-weight: 600;
+        }
+        
+        .message {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            background-color: white;
+            border-bottom: 1px solid #dbdbdb;
+            cursor: pointer;
+        }
+        
+        .message-avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 12px;
+        }
+        
+        .message-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .message-content {
+            flex: 1;
+        }
+        
+        .message-user {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+        
+        .message-username {
+            font-weight: 600;
+            max-width: 150px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        .message-time {
+            color: #8e8e8e;
+            font-size: 12px;
+        }
+        
+        .message-text {
+            color: #8e8e8e;
+            font-size: 14px;
+            max-width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        /* Phoenix AI Assistant */
+        .phoenix-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 100;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+        .phoenix-header {
+            font-size: 24px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .phoenix-input {
+            width: 80%;
+            padding: 12px 16px;
+            border-radius: 25px;
+            border: none;
+            background-color: #333;
+            color: white;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .phoenix-results {
+            width: 80%;
+            max-height: 60vh;
+            overflow-y: auto;
+            background-color: #333;
+            border-radius: 10px;
+            padding: 16px;
+        }
+        
+        .phoenix-result {
+            padding: 12px 0;
+            border-bottom: 1px solid #555;
+            cursor: pointer;
+        }
+        
+        .phoenix-result:last-child {
+            border-bottom: none;
+        }
+        
+        .phoenix-result-user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .phoenix-result-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+        
+        .phoenix-result-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .phoenix-result-name {
+            font-weight: 600;
+        }
+        
+        .phoenix-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Settings Page */
+        .settings-container {
+            display: none;
+            margin-bottom: 60px;
+        }
+        
+        .settings-header {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            background-color: white;
+            border-bottom: 1px solid #dbdbdb;
+        }
+        
+        .settings-back {
+            font-size: 20px;
+            margin-right: 16px;
+            cursor: pointer;
+        }
+        
+        .settings-title {
+            font-weight: 600;
+            flex: 1;
+        }
+        
+        .settings-option {
+            padding: 16px;
+            border-bottom: 1px solid #dbdbdb;
+            background-color: white;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        /* Active state for bottom nav */
+        .active-tab {
+            color: #0095f6;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Main App View (hidden by default) -->
+    <div id="app-view" style="display: none;">
+        <!-- Home Feed -->
+        <div id="home-feed">
+            <header class="header">
+                <div class="logo">Noesis</div>
+                <div class="header-icons">
+                    <i class="fas fa-fire" id="phoenix-ai-btn"></i>
+                    <i class="fas fa-search" id="search"></i>
+                    <i class="fas fa-plus-square" id="create-post"></i>
+                </div>
+            </header>
+            
+            <div class="stories">
+                <div class="story">
+                    <div class="story-avatar">
+                        <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="User">
+                    </div>
+                    <span class="story-username">your_story</span>
+                </div>
+                <div class="story">
+                    <div class="story-avatar">
+                        <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="User">
+                    </div>
+                    <span class="story-username">user1</span>
+                </div>
+                <div class="story">
+                    <div class="story-avatar">
+                        <img src="https://randomuser.me/api/portraits/women/2.jpg" alt="User">
+                    </div>
+                    <span class="story-username">traveler</span>
+                </div>
+                <div class="story">
+                    <div class="story-avatar">
+                        <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="User">
+                    </div>
+                    <span class="story-username">photographer</span>
+                </div>
+                <div class="story">
+                    <div class="story-avatar">
+                        <img src="https://randomuser.me/api/portraits/women/3.jpg" alt="User">
+                    </div>
+                    <span class="story-username">foodie</span>
+                </div>
+            </div>
+            
+            <div class="posts">
+                <div class="post">
+                    <div class="post-header">
+                        <div class="post-user">
+                            <div class="post-user-avatar">
+                                <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="User">
+                            </div>
+                            <span class="post-username">nature_lover</span>
+                        </div>
+                        <div class="post-more">...</div>
+                    </div>
+                    <div class="post-image">
+                        <img src="https://source.unsplash.com/random/600x600/?nature" alt="Post">
+                    </div>
+                    <div class="post-actions">
+                        <div class="post-actions-left">
+                            <i class="far fa-heart"></i>
+                            <i class="far fa-comment"></i>
+                            <i class="far fa-paper-plane"></i>
+                        </div>
+                        <i class="far fa-bookmark"></i>
+                    </div>
+                    <div class="post-likes">1,234 likes</div>
+                    <div class="post-caption">
+                        <span class="post-caption-username">nature_lover</span>
+                        Beautiful sunset at the beach today! #nature #sunset #beach
+                    </div>
+                    <div class="post-comments">View all 124 comments</div>
+                    <div class="post-time">2 hours ago</div>
+                </div>
+                
+                <div class="post">
+                    <div class="post-header">
+                        <div class="post-user">
+                            <div class="post-user-avatar">
+                                <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="User">
+                            </div>
+                            <span class="post-username">food_explorer</span>
+                        </div>
+                        <div class="post-more">...</div>
+                    </div>
+                    <div class="post-image">
+                        <img src="https://source.unsplash.com/random/600x600/?food" alt="Post">
+                    </div>
+                    <div class="post-actions">
+                        <div class="post-actions-left">
+                            <i class="far fa-heart"></i>
+                            <i class="far fa-comment"></i>
+                            <i class="far fa-paper-plane"></i>
+                        </div>
+                        <i class="far fa-bookmark"></i>
+                    </div>
+                    <div class="post-likes">892 likes</div>
+                    <div class="post-caption">
+                        <span class="post-caption-username">food_explorer</span>
+                        Homemade pasta for dinner tonight! #foodie #homecooking #pasta
+                    </div>
+                    <div class="post-comments">View all 56 comments</div>
+                    <div class="post-time">5 hours ago</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Profile Page -->
+        <div class="profile-container" id="profile-page">
+            <div class="profile-header">
+                <div class="profile-settings" id="profile-settings">
+                    <i class="fas fa-cog"></i>
+                </div>
+                <div class="profile-info">
+                    <div class="profile-avatar">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Profile">
+                    </div>
+                    <div class="profile-stats">
+                        <div class="profile-stat">
+                            <span class="profile-stat-count">245</span>
+                            <span class="profile-stat-label">Posts</span>
+                        </div>
+                        <div class="profile-stat">
+                            <span class="profile-stat-count">1.2K</span>
+                            <span class="profile-stat-label">Followers</span>
+                        </div>
+                        <div class="profile-stat">
+                            <span class="profile-stat-count">583</span>
+                            <span class="profile-stat-label">Following</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-bio">
+                    <div class="profile-name">Jane Doe</div>
+                    <p>Digital creator | Photography enthusiast | Travel lover</p>
+                    <p>📍 San Francisco, CA</p>
+                </div>
+            </div>
+            
+            <div class="profile-highlights">
+                <div class="highlight">
+                    <div class="highlight-avatar">
+                        <img src="https://source.unsplash.com/random/100x100/?travel" alt="Highlight">
+                    </div>
+                    <span class="highlight-name">Travel</span>
+                </div>
+                <div class="highlight">
+                    <div class="highlight-avatar">
+                        <img src="https://source.unsplash.com/random/100x100/?food" alt="Highlight">
+                    </div>
+                    <span class="highlight-name">Food</span>
+                </div>
+                <div class="highlight">
+                    <div class="highlight-avatar">
+                        <img src="https://source.unsplash.com/random/100x100/?nature" alt="Highlight">
+                    </div>
+                    <span class="highlight-name">Nature</span>
+                </div>
+                <div class="highlight">
+                    <div class="highlight-avatar">
+                        <img src="https://source.unsplash.com/random/100x100/?fashion" alt="Highlight">
+                    </div>
+                    <span class="highlight-name">Fashion</span>
+                </div>
+            </div>
+            
+            <div class="profile-tabs">
+                <div class="profile-tab active" data-tab="posts">
+                    <i class="fas fa-th"></i>
+                </div>
+                <div class="profile-tab" data-tab="saved">
+                    <i class="far fa-bookmark"></i>
+                </div>
+                <div class="profile-tab" data-tab="tagged">
+                    <i class="far fa-user"></i>
+                </div>
+            </div>
+            
+            <div class="profile-posts" id="profile-posts">
+                <div class="profile-post">
+                    <img src="https://source.unsplash.com/random/300x300/?nature,1" alt="Post">
+                </div>
+                <div class="profile-post">
+                    <img src="https://source.unsplash.com/random/300x300/?nature,2" alt="Post">
+                </div>
+                <div class="profile-post">
+                    <img src="https://source.unsplash.com/random/300x300/?nature,3" alt="Post">
+                </div>
+                <div class="profile-post">
+                    <img src="https://source.unsplash.com/random/300x300/?nature,4" alt="Post">
+                </div>
+                <div class="profile-post">
+                    <img src="https://source.unsplash.com/random/300x300/?nature,5" alt="Post">
+                </div>
+                <div class="profile-post">
+                    <img src="https://source.unsplash.com/random/300x300/?nature,6" alt="Post">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Notifications Page -->
+        <div class="notifications-container" id="notifications-page">
+            <div class="notification">
+                <div class="notification-avatar">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User">
+                </div>
+                <div class="notification-content">
+                    <div><strong>john_doe</strong> started following you</div>
+                    <div class="notification-time">2 hours ago</div>
+                </div>
+                <button class="notification-follow">Follow</button>
+            </div>
+            <div class="notification">
+                <div class="notification-avatar">
+                    <img src="https://randomuser.me/api/portraits/women/22.jpg" alt="User">
+                </div>
+                <div class="notification-content">
+                    <div><strong>sarah_smith</strong> liked your post</div>
+                    <div class="notification-time">4 hours ago</div>
+                </div>
+            </div>
+            <div class="notification">
+                <div class="notification-avatar">
+                    <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="User">
+                </div>
+                <div class="notification-content">
+                    <div><strong>mike_jones</strong> commented: "Great shot!"</div>
+                    <div class="notification-time">6 hours ago</div>
+                </div>
+            </div>
+            <div class="notification">
+                <div class="notification-avatar">
+                    <img src="https://randomuser.me/api/portraits/women/33.jpg" alt="User">
+                </div>
+                <div class="notification-content">
+                    <div><strong>emily_wilson</strong> started following you</div>
+                    <div class="notification-time">1 day ago</div>
+                </div>
+                <button class="notification-follow">Follow</button>
+            </div>
+            
+            <div class="suggestions-header">
+                <div class="suggestions-title">Suggestions For You</div>
+                <div class="suggestions-see-all">See All</div>
+            </div>
+            
+            <div class="notification">
+                <div class="notification-avatar">
+                    <img src="https://randomuser.me/api/portraits/men/28.jpg" alt="User">
+                </div>
+                <div class="notification-content">
+                    <div><strong>travel_guy</strong> followed by john_doe + 3 more</div>
+                    <div class="notification-time">New to Noesis</div>
+                </div>
+                <button class="notification-follow">Follow</button>
+            </div>
+            <div class="notification">
+                <div class="notification-avatar">
+                    <img src="https://randomuser.me/api/portraits/women/19.jpg" alt="User">
+                </div>
+                <div class="notification-content">
+                    <div><strong>food_lover</strong> followed by sarah_smith</div>
+                    <div class="notification-time">New to Noesis</div>
+                </div>
+                <button class="notification-follow">Follow</button>
+            </div>
+        </div>
+        
+        <!-- Reels Page -->
+        <div class="reels-container" id="reels-page">
+            <div class="reel">
+                <video class="reel-video" autoplay loop muted>
+                    <source src="https://assets.mixkit.co/videos/preview/mixkit-woman-dancing-under-neon-lights-1230-large.mp4" type="video/mp4">
+                </video>
+                <div class="reel-sidebar">
+                    <div class="reel-action">
+                        <i class="far fa-heart"></i>
+                        <span class="reel-action-count">12.4K</span>
+                    </div>
+                    <div class="reel-action">
+                        <i class="far fa-comment"></i>
+                        <span class="reel-action-count">1.2K</span>
+                    </div>
+                    <div class="reel-action">
+                        <i class="far fa-paper-plane"></i>
+                        <span class="reel-action-count">Share</span>
+                    </div>
+                    <div class="reel-user">
+                        <div class="reel-user-avatar">
+                            <img src="https://randomuser.me/api/portraits/women/25.jpg" alt="User">
+                        </div>
+                    </div>
+                </div>
+                <div class="reel-info">
+                    <div class="reel-username">@dance_queen</div>
+                    <div class="reel-music">
+                        <i class="fas fa-music"></i>
+                        <span>Original Audio - dance_queen</span>
+                    </div>
+                    <div>Friday night vibes! 💃 #dance #nightout</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Messages Page -->
+        <div class="messages-container" id="messages-page">
+            <div class="messages-header">
+                <div class="messages-title">Messages</div>
+            </div>
+            
+            <div class="message">
+                <div class="message-avatar">
+                    <img src="https://randomuser.me/api/portraits/men/12.jpg" alt="User">
+                </div>
+                <div class="message-content">
+                    <div class="message-user">
+                        <div class="message-username">john_doe_longusername...</div>
+                        <div class="message-time">2h</div>
+                    </div>
+                    <div class="message-text">Hey, how are you doing?</div>
+                </div>
+            </div>
+            <div class="message">
+                <div class="message-avatar">
+                    <img src="https://randomuser.me/api/portraits/women/15.jpg" alt="User">
+                </div>
+                <div class="message-content">
+                    <div class="message-user">
+                        <div class="message-username">sarah_smith</div>
+                        <div class="message-time">5h</div>
+                    </div>
+                    <div class="message-text">Check out this new place!</div>
+                </div>
+            </div>
+            <div class="message">
+                <div class="message-avatar">
+                    <img src="https://randomuser.me/api/portraits/men/33.jpg" alt="User">
+                </div>
+                <div class="message-content">
+                    <div class="message-user">
+                        <div class="message-username">mike_jones</div>
+                        <div class="message-time">1d</div>
+                    </div>
+                    <div class="message-text">Let's meet this weekend</div>
+                </div>
+            </div>
+            <div class="message">
+                <div class="message-avatar">
+                    <img src="https://randomuser.me/api/portraits/women/28.jpg" alt="User">
+                </div>
+                <div class="message-content">
+                    <div class="message-user">
+                        <div class="message-username">emily_wilson</div>
+                        <div class="message-time">2d</div>
+                    </div>
+                    <div class="message-text">Thanks for the follow!</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Settings Page -->
+        <div class="settings-container" id="settings-page">
+            <div class="settings-header">
+                <div class="settings-back" id="settings-back">
+                    <i class="fas fa-arrow-left"></i>
+                </div>
+                <div class="settings-title">Settings</div>
+            </div>
+            
+            <div class="settings-option">Edit Profile</div>
+            <div class="settings-option">Change Password</div>
+            <div class="settings-option">Privacy</div>
+            <div class="settings-option">Notifications</div>
+            <div class="settings-option">Security</div>
+            <div class="settings-option">Help</div>
+            <div class="settings-option">About</div>
+            <div class="settings-option">Log Out</div>
+        </div>
+        
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <i class="fas fa-home active-tab" id="home-tab"></i>
+            <i class="far fa-user" id="profile-tab"></i>
+            <i class="far fa-bell" id="notifications-tab"></i>
+            <i class="fas fa-film" id="reels-tab"></i>
+            <i class="far fa-envelope" id="messages-tab"></i>
+        </div>
+        
+        <!-- Phoenix AI Assistant -->
+        <div class="phoenix-container" id="phoenix-ai">
+            <div class="phoenix-close" id="phoenix-close">
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="phoenix-header">
+                <i class="fas fa-fire"></i>
+                <span>Phoenix AI Assistant</span>
+            </div>
+            <input type="text" class="phoenix-input" placeholder="Search profiles, reels, or ask me anything...">
+            <div class="phoenix-results">
+                <div class="phoenix-result">
+                    <div class="phoenix-result-user">
+                        <div class="phoenix-result-avatar">
+                            <img src="https://randomuser.me/api/portraits/women/25.jpg" alt="User">
+                        </div>
+                        <div>
+                            <div class="phoenix-result-name">dance_queen</div>
+                            <div>Dance content creator</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="phoenix-result">
+                    <div class="phoenix-result-user">
+                        <div class="phoenix-result-avatar">
+                            <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="User">
+                        </div>
+                        <div>
+                            <div class="phoenix-result-name">travel_guy</div>
+                            <div>Travel blogger</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="phoenix-result">
+                    <div class="phoenix-result-user">
+                        <div class="phoenix-result-avatar">
+                            <img src="https://randomuser.me/api/portraits/women/33.jpg" alt="User">
+                        </div>
+                        <div>
+                            <div class="phoenix-result-name">food_lover</div>
+                            <div>Food recipes and reviews</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="phoenix-result">
+                    <div>Reels matching: dance tutorial</div>
+                </div>
+                <div class="phoenix-result">
+                    <div>Reels matching: travel destinations</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Login/Signup View -->
+    <div id="auth-view">
+        <div class="auth-container">
+            <div class="auth-box">
+                <div class="auth-logo">Noesis</div>
+                <form class="auth-form" id="login-form">
+                    <input type="text" class="auth-input" placeholder="Username or email" required>
+                    <input type="password" class="auth-input" placeholder="Password" required>
+                    <button type="submit" class="auth-button">Log In</button>
+                </form>
+                
+                <div class="auth-divider">OR</div>
+                
+                <a href="#" style="display: block; margin-top: 20px; font-size: 12px; color: #00376b; text-decoration: none;">
+                    Forgot password?
+                </a>
+            </div>
+            
+            <div class="auth-switch">
+                Don't have an account? <a href="#" class="auth-link" id="show-signup">Sign up</a>
+            </div>
+        </div>
+        
+        <div class="auth-container" id="signup-container" style="display: none;">
+            <div class="auth-box">
+                <div class="auth-logo">Noesis</div>
+                <p style="color: #8e8e8e; margin-bottom: 20px; font-size: 16px; font-weight: 600;">
+                    Sign up to see photos and videos from your friends.
+                </p>
+                
+                <form class="auth-form" id="signup-form">
+                    <input type="email" class="auth-input" placeholder="Email" required>
+                    <input type="text" class="auth-input" placeholder="Full Name" required>
+                    <input type="text" class="auth-input" placeholder="Username" required>
+                    <input type="password" class="auth-input" placeholder="Password" required>
+                    <button type="submit" class="auth-button">Sign Up</button>
+                </form>
+                
+                <p style="font-size: 12px; color: #8e8e8e; margin: 20px 0; text-align: center;">
+                    By signing up, you agree to our <a href="#" style="color: #00376b; text-decoration: none;">Terms</a>, <a href="#" style="color: #00376b; text-decoration: none;">Data Policy</a> and <a href="#" style="color: #00376b; text-decoration: none;">Cookies Policy</a>.
+                </p>
+            </div>
+            
+            <div class="auth-switch">
+                Have an account? <a href="#" class="auth-link" id="show-login">Log in</a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Toggle between login and signup views
+        document.getElementById('show-signup').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('auth-view').style.display = 'none';
+            document.getElementById('signup-container').style.display = 'flex';
+        });
+        
+        document.getElementById('show-login').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('auth-view').style.display = 'block';
+            document.getElementById('signup-container').style.display = 'none';
+        });
+        
+        // Simulate login (in a real app, this would be an API call)
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('auth-view').style.display = 'none';
+            document.getElementById('signup-container').style.display = 'none';
+            document.getElementById('app-view').style.display = 'block';
+        });
+        
+        // Simulate signup (in a real app, this would be an API call)
+        document.getElementById('signup-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('auth-view').style.display = 'none';
+            document.getElementById('signup-container').style.display = 'none';
+            document.getElementById('app-view').style.display = 'block';
+        });
+        
+        // Bottom navigation functionality
+        const tabs = {
+            'home-tab': 'home-feed',
+            'profile-tab': 'profile-page',
+            'notifications-tab': 'notifications-page',
+            'reels-tab': 'reels-page',
+            'messages-tab': 'messages-page'
+        };
+        
+        const tabElements = document.querySelectorAll('.bottom-nav i');
+        
+        tabElements.forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Hide all pages
+                document.getElementById('home-feed').style.display = 'none';
+                document.getElementById('profile-page').style.display = 'none';
+                document.getElementById('notifications-page').style.display = 'none';
+                document.getElementById('reels-page').style.display = 'none';
+                document.getElementById('messages-page').style.display = 'none';
+                document.getElementById('settings-page').style.display = 'none';
+                
+                // Show selected page
+                const pageId = tabs[this.id];
+                if (pageId) {
+                    document.getElementById(pageId).style.display = 'block';
+                }
+                
+                // Update active tab
+                tabElements.forEach(t => t.classList.remove('active-tab'));
+                this.classList.add('active-tab');
+            });
+        });
+        
+        // Phoenix AI Assistant
+        document.getElementById('phoenix-ai-btn').addEventListener('click', function() {
+            document.getElementById('phoenix-ai').style.display = 'flex';
+        });
+        
+        document.getElementById('phoenix-close').addEventListener('click', function() {
+            document.getElementById('phoenix-ai').style.display = 'none';
+        });
+        
+        // Profile settings
+        document.getElementById('profile-settings').addEventListener('click', function() {
+            document.getElementById('profile-page').style.display = 'none';
+            document.getElementById('settings-page').style.display = 'block';
+        });
+        
+        // Settings back button
+        document.getElementById('settings-back').addEventListener('click', function() {
+            document.getElementById('settings-page').style.display = 'none';
+            document.getElementById('profile-page').style.display = 'block';
+        });
+        
+        // Profile tabs
+        const profileTabs = document.querySelectorAll('.profile-tab');
+        profileTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                profileTabs.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                // In a real app, this would load different content
+            });
+        });
+        
+        // Initialize with home feed visible
+        document.getElementById('home-feed').style.display = 'block';
+    </script>
+</body>
+</html>
