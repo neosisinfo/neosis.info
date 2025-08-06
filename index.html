@@ -338,12 +338,24 @@
             height: 80px;
             border-radius: 50%;
             overflow: hidden;
+            position: relative;
         }
         
         .profile-avatar img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+        }
+        
+        .profile-avatar .default-avatar {
+            width: 100%;
+            height: 100%;
+            background-color: #dbdbdb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #8e8e8e;
+            font-size: 40px;
         }
         
         .profile-stats {
@@ -412,6 +424,7 @@
             white-space: nowrap;
         }
         
+        /* Profile Tabs */
         .profile-tabs {
             display: flex;
             border-top: 1px solid #dbdbdb;
@@ -804,9 +817,362 @@
             cursor: pointer;
         }
         
+        /* Edit Profile Page */
+        .edit-profile-container {
+            display: none;
+            margin-bottom: 60px;
+        }
+        
+        .edit-profile-header {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            background-color: white;
+            border-bottom: 1px solid #dbdbdb;
+        }
+        
+        .edit-profile-back {
+            font-size: 20px;
+            margin-right: 16px;
+            cursor: pointer;
+        }
+        
+        .edit-profile-title {
+            font-weight: 600;
+            flex: 1;
+        }
+        
+        .edit-profile-save {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0095f6;
+            cursor: pointer;
+        }
+        
+        .edit-profile-content {
+            padding: 16px;
+        }
+        
+        .edit-profile-avatar {
+            display: flex;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        
+        .edit-profile-avatar-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 24px;
+        }
+        
+        .edit-profile-avatar-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .edit-profile-avatar-img .default-avatar {
+            width: 100%;
+            height: 100%;
+            background-color: #dbdbdb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #8e8e8e;
+            font-size: 40px;
+        }
+        
+        .edit-profile-change-photo {
+            color: #0095f6;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .edit-profile-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .edit-profile-field {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .edit-profile-label {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .edit-profile-input {
+            padding: 10px;
+            border: 1px solid #dbdbdb;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .edit-profile-bio {
+            min-height: 80px;
+            resize: vertical;
+        }
+        
+        /* Change Password Page */
+        .change-password-container {
+            display: none;
+            margin-bottom: 60px;
+        }
+        
+        .change-password-header {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            background-color: white;
+            border-bottom: 1px solid #dbdbdb;
+        }
+        
+        .change-password-back {
+            font-size: 20px;
+            margin-right: 16px;
+            cursor: pointer;
+        }
+        
+        .change-password-title {
+            font-weight: 600;
+            flex: 1;
+        }
+        
+        .change-password-save {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0095f6;
+            cursor: pointer;
+        }
+        
+        .change-password-content {
+            padding: 16px;
+        }
+        
+        .change-password-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .change-password-field {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .change-password-label {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .change-password-input {
+            padding: 10px;
+            border: 1px solid #dbdbdb;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .forgot-password-link {
+            color: #262626;
+            font-weight: 600;
+            text-decoration: none;
+            display: block;
+            margin-top: 16px;
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        .change-password-button {
+            padding: 10px;
+            background-color: #0095f6;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 16px;
+        }
+        
+        .success-message {
+            color: #0095f6;
+            text-align: center;
+            margin-top: 16px;
+            font-weight: 600;
+            display: none;
+        }
+        
+        /* Photo Options Modal */
+        .photo-options-modal {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: white;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            padding: 16px;
+            z-index: 101;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .photo-options-title {
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        
+        .photo-option {
+            padding: 16px;
+            text-align: center;
+            border-bottom: 1px solid #dbdbdb;
+            cursor: pointer;
+        }
+        
+        .photo-option:last-child {
+            border-bottom: none;
+        }
+        
+        .photo-option.delete {
+            color: #ed4956;
+            font-weight: 600;
+        }
+        
+        .photo-option.cancel {
+            margin-top: 8px;
+            border-top: 1px solid #dbdbdb;
+        }
+        
+        /* Camera Preview */
+        .camera-preview {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: black;
+            z-index: 102;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            padding-bottom: 40px;
+        }
+        
+        .camera-view {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .camera-controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .camera-shutter {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: white;
+            border: 2px solid #dbdbdb;
+            cursor: pointer;
+        }
+        
+        .camera-close {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Photo Library */
+        .photo-library {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: white;
+            z-index: 102;
+            flex-direction: column;
+        }
+        
+        .photo-library-header {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            border-bottom: 1px solid #dbdbdb;
+        }
+        
+        .photo-library-back {
+            font-size: 20px;
+            margin-right: 16px;
+            cursor: pointer;
+        }
+        
+        .photo-library-title {
+            font-weight: 600;
+            flex: 1;
+        }
+        
+        .photo-library-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            flex: 1;
+            overflow-y: auto;
+        }
+        
+        .photo-library-item {
+            aspect-ratio: 1/1;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .photo-library-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .photo-library-item.selected::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 149, 246, 0.3);
+            border: 2px solid #0095f6;
+        }
+        
         /* Active state for bottom nav */
         .active-tab {
             color: #0095f6;
+        }
+        
+        /* Overlay */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 100;
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -928,8 +1294,11 @@
                     <i class="fas fa-cog"></i>
                 </div>
                 <div class="profile-info">
-                    <div class="profile-avatar">
-                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Profile">
+                    <div class="profile-avatar" id="profile-avatar">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Profile" id="profile-avatar-img">
+                        <div class="default-avatar" id="default-avatar" style="display: none;">
+                            <i class="fas fa-user"></i>
+                        </div>
                     </div>
                     <div class="profile-stats">
                         <div class="profile-stat">
@@ -1183,14 +1552,89 @@
                 <div class="settings-title">Settings</div>
             </div>
             
-            <div class="settings-option">Edit Profile</div>
-            <div class="settings-option">Change Password</div>
+            <div class="settings-option" id="edit-profile-option">Edit Profile</div>
+            <div class="settings-option" id="change-password-option">Change Password</div>
             <div class="settings-option">Privacy</div>
             <div class="settings-option">Notifications</div>
             <div class="settings-option">Security</div>
             <div class="settings-option">Help</div>
             <div class="settings-option">About</div>
             <div class="settings-option">Log Out</div>
+        </div>
+        
+        <!-- Edit Profile Page -->
+        <div class="edit-profile-container" id="edit-profile-page">
+            <div class="edit-profile-header">
+                <div class="edit-profile-back" id="edit-profile-back">
+                    <i class="fas fa-arrow-left"></i>
+                </div>
+                <div class="edit-profile-title">Edit Profile</div>
+                <div class="edit-profile-save" id="edit-profile-save">Done</div>
+            </div>
+            
+            <div class="edit-profile-content">
+                <div class="edit-profile-avatar">
+                    <div class="edit-profile-avatar-img" id="edit-profile-avatar-img">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Profile" id="edit-profile-avatar-image">
+                        <div class="default-avatar" id="edit-profile-default-avatar" style="display: none;">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </div>
+                    <div class="edit-profile-change-photo" id="change-profile-photo">
+                        Change Profile Photo
+                    </div>
+                </div>
+                
+                <form class="edit-profile-form">
+                    <div class="edit-profile-field">
+                        <label class="edit-profile-label">Name</label>
+                        <input type="text" class="edit-profile-input" value="Jane Doe">
+                    </div>
+                    <div class="edit-profile-field">
+                        <label class="edit-profile-label">Username</label>
+                        <input type="text" class="edit-profile-input" value="jane_doe">
+                    </div>
+                    <div class="edit-profile-field">
+                        <label class="edit-profile-label">Bio</label>
+                        <textarea class="edit-profile-input edit-profile-bio">Digital creator | Photography enthusiast | Travel lover</textarea>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Change Password Page -->
+        <div class="change-password-container" id="change-password-page">
+            <div class="change-password-header">
+                <div class="change-password-back" id="change-password-back">
+                    <i class="fas fa-arrow-left"></i>
+                </div>
+                <div class="change-password-title">Change Password</div>
+            </div>
+            
+            <div class="change-password-content">
+                <form class="change-password-form" id="change-password-form">
+                    <div class="change-password-field">
+                        <label class="change-password-label">Current Password</label>
+                        <input type="password" class="change-password-input" id="current-password" required>
+                    </div>
+                    <div class="change-password-field">
+                        <label class="change-password-label">New Password</label>
+                        <input type="password" class="change-password-input" id="new-password" required>
+                    </div>
+                    <div class="change-password-field">
+                        <label class="change-password-label">Re-type New Password</label>
+                        <input type="password" class="change-password-input" id="retype-password" required>
+                    </div>
+                    
+                    <button type="submit" class="change-password-button">Change Password</button>
+                    
+                    <div class="success-message" id="success-message">
+                        Password changed successfully!
+                    </div>
+                    
+                    <a class="forgot-password-link" id="forgot-password-link">Forgot your password?</a>
+                </form>
+            </div>
         </div>
         
         <!-- Bottom Navigation -->
@@ -1254,6 +1698,69 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Photo Options Modal -->
+        <div class="photo-options-modal" id="photo-options-modal">
+            <div class="photo-options-title">Change Profile Photo</div>
+            <div class="photo-option delete" id="delete-photo">Delete</div>
+            <div class="photo-option" id="take-photo">Take Photo</div>
+            <div class="photo-option" id="choose-from-library">Choose from Library</div>
+            <div class="photo-option cancel" id="cancel-photo-options">Cancel</div>
+        </div>
+        
+        <!-- Camera Preview -->
+        <div class="camera-preview" id="camera-preview">
+            <div class="camera-close" id="camera-close">
+                <i class="fas fa-times"></i>
+            </div>
+            <video class="camera-view" id="camera-view"></video>
+            <div class="camera-controls">
+                <div class="camera-shutter" id="camera-shutter"></div>
+            </div>
+        </div>
+        
+        <!-- Photo Library -->
+        <div class="photo-library" id="photo-library">
+            <div class="photo-library-header">
+                <div class="photo-library-back" id="photo-library-back">
+                    <i class="fas fa-arrow-left"></i>
+                </div>
+                <div class="photo-library-title">Choose Photo</div>
+            </div>
+            <div class="photo-library-grid" id="photo-library-grid">
+                <!-- Photos will be dynamically loaded here -->
+                <div class="photo-library-item">
+                    <img src="https://source.unsplash.com/random/300x300/?portrait,1" alt="Photo">
+                </div>
+                <div class="photo-library-item">
+                    <img src="https://source.unsplash.com/random/300x300/?portrait,2" alt="Photo">
+                </div>
+                <div class="photo-library-item">
+                    <img src="https://source.unsplash.com/random/300x300/?portrait,3" alt="Photo">
+                </div>
+                <div class="photo-library-item">
+                    <img src="https://source.unsplash.com/random/300x300/?portrait,4" alt="Photo">
+                </div>
+                <div class="photo-library-item">
+                    <img src="https://source.unsplash.com/random/300x300/?portrait,5" alt="Photo">
+                </div>
+                <div class="photo-library-item">
+                    <img src="https://source.unsplash.com/random/300x300/?portrait,6" alt="Photo">
+                </div>
+                <div class="photo-library-item">
+                    <img src="https://source.unsplash.com/random/300x300/?portrait,7" alt="Photo">
+                </div>
+                <div class="photo-library-item">
+                    <img src="https://source.unsplash.com/random/300x300/?portrait,8" alt="Photo">
+                </div>
+                <div class="photo-library-item">
+                    <img src="https://source.unsplash.com/random/300x300/?portrait,9" alt="Photo">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Overlay -->
+        <div class="overlay" id="overlay"></div>
     </div>
     
     <!-- Login/Signup View -->
@@ -1355,6 +1862,8 @@
                 document.getElementById('reels-page').style.display = 'none';
                 document.getElementById('messages-page').style.display = 'none';
                 document.getElementById('settings-page').style.display = 'none';
+                document.getElementById('edit-profile-page').style.display = 'none';
+                document.getElementById('change-password-page').style.display = 'none';
                 
                 // Show selected page
                 const pageId = tabs[this.id];
@@ -1387,6 +1896,172 @@
         document.getElementById('settings-back').addEventListener('click', function() {
             document.getElementById('settings-page').style.display = 'none';
             document.getElementById('profile-page').style.display = 'block';
+        });
+        
+        // Edit profile option
+        document.getElementById('edit-profile-option').addEventListener('click', function() {
+            document.getElementById('settings-page').style.display = 'none';
+            document.getElementById('edit-profile-page').style.display = 'block';
+        });
+        
+        // Change password option
+        document.getElementById('change-password-option').addEventListener('click', function() {
+            document.getElementById('settings-page').style.display = 'none';
+            document.getElementById('change-password-page').style.display = 'block';
+        });
+        
+        // Edit profile back button
+        document.getElementById('edit-profile-back').addEventListener('click', function() {
+            document.getElementById('edit-profile-page').style.display = 'none';
+            document.getElementById('settings-page').style.display = 'block';
+        });
+        
+        // Change password back button
+        document.getElementById('change-password-back').addEventListener('click', function() {
+            document.getElementById('change-password-page').style.display = 'none';
+            document.getElementById('settings-page').style.display = 'block';
+        });
+        
+        // Edit profile save button
+        document.getElementById('edit-profile-save').addEventListener('click', function() {
+            // In a real app, this would save the changes
+            document.getElementById('edit-profile-page').style.display = 'none';
+            document.getElementById('profile-page').style.display = 'block';
+        });
+        
+        // Change password form submission
+        document.getElementById('change-password-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const newPassword = document.getElementById('new-password').value;
+            const retypePassword = document.getElementById('retype-password').value;
+            
+            // Simple validation - check if passwords match
+            if (newPassword !== retypePassword) {
+                alert("Passwords don't match!");
+                return;
+            }
+            
+            // In a real app, this would send the new password to the server
+            // For this demo, we'll just show a success message
+            document.getElementById('success-message').style.display = 'block';
+            
+            // Hide the success message after 3 seconds
+            setTimeout(() => {
+                document.getElementById('success-message').style.display = 'none';
+                document.getElementById('change-password-page').style.display = 'none';
+                document.getElementById('settings-page').style.display = 'block';
+            }, 3000);
+        });
+        
+        // Forgot password link
+        document.getElementById('forgot-password-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // In a real app, this would send a password reset email
+            alert("A password reset email has been sent to your email address.");
+        });
+        
+        // Change profile photo
+        document.getElementById('change-profile-photo').addEventListener('click', function() {
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('photo-options-modal').style.display = 'block';
+        });
+        
+        // Photo options modal
+        document.getElementById('cancel-photo-options').addEventListener('click', function() {
+            document.getElementById('photo-options-modal').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        });
+        
+        // Delete photo option
+        document.getElementById('delete-photo').addEventListener('click', function() {
+            // Hide the current profile image and show default avatar
+            document.getElementById('profile-avatar-img').style.display = 'none';
+            document.getElementById('default-avatar').style.display = 'flex';
+            document.getElementById('edit-profile-avatar-image').style.display = 'none';
+            document.getElementById('edit-profile-default-avatar').style.display = 'flex';
+            
+            // Close the modal
+            document.getElementById('photo-options-modal').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        });
+        
+        // Take photo option
+        document.getElementById('take-photo').addEventListener('click', function() {
+            document.getElementById('photo-options-modal').style.display = 'none';
+            document.getElementById('camera-preview').style.display = 'flex';
+            
+            // In a real app, this would access the device camera
+            // For this demo, we'll just simulate it
+        });
+        
+        // Camera close button
+        document.getElementById('camera-close').addEventListener('click', function() {
+            document.getElementById('camera-preview').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        });
+        
+        // Camera shutter button
+        document.getElementById('camera-shutter').addEventListener('click', function() {
+            // In a real app, this would capture the photo
+            // For this demo, we'll just simulate it with a random image
+            const randomImage = `https://randomuser.me/api/portraits/women/${Math.floor(Math.random() * 100)}.jpg`;
+            
+            // Update both profile and edit profile avatars
+            document.getElementById('profile-avatar-img').src = randomImage;
+            document.getElementById('profile-avatar-img').style.display = 'block';
+            document.getElementById('default-avatar').style.display = 'none';
+            
+            document.getElementById('edit-profile-avatar-image').src = randomImage;
+            document.getElementById('edit-profile-avatar-image').style.display = 'block';
+            document.getElementById('edit-profile-default-avatar').style.display = 'none';
+            
+            // Close the camera preview
+            document.getElementById('camera-preview').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        });
+        
+        // Choose from library option
+        document.getElementById('choose-from-library').addEventListener('click', function() {
+            document.getElementById('photo-options-modal').style.display = 'none';
+            document.getElementById('photo-library').style.display = 'flex';
+        });
+        
+        // Photo library back button
+        document.getElementById('photo-library-back').addEventListener('click', function() {
+            document.getElementById('photo-library').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        });
+        
+        // Photo library item selection
+        const photoItems = document.querySelectorAll('.photo-library-item');
+        photoItems.forEach(item => {
+            item.addEventListener('click', function() {
+                // Remove selection from all items
+                photoItems.forEach(i => i.classList.remove('selected'));
+                
+                // Select this item
+                this.classList.add('selected');
+                
+                // Get the image source
+                const imgSrc = this.querySelector('img').src;
+                
+                // Update both profile and edit profile avatars
+                document.getElementById('profile-avatar-img').src = imgSrc;
+                document.getElementById('profile-avatar-img').style.display = 'block';
+                document.getElementById('default-avatar').style.display = 'none';
+                
+                document.getElementById('edit-profile-avatar-image').src = imgSrc;
+                document.getElementById('edit-profile-avatar-image').style.display = 'block';
+                document.getElementById('edit-profile-default-avatar').style.display = 'none';
+                
+                // Close the photo library after a short delay (simulating selection)
+                setTimeout(() => {
+                    document.getElementById('photo-library').style.display = 'none';
+                    document.getElementById('overlay').style.display = 'none';
+                }, 500);
+            });
         });
         
         // Profile tabs
