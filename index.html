@@ -587,7 +587,8 @@ document.getElementById('signup-form').addEventListener('submit', function(e) {
 
     document.getElementById('auth-view').style.display = 'none';
     document.getElementById('signup-container').style.display = 'none';
-    document.getElementById('app-view').style.display = 'block';
+    document.getElementById('app-view').style.display='block';                                     
+    document.querySelector('.bottom-nav').style.display = 'flex';
 });
         
         const sampleNotifications = [
@@ -738,7 +739,8 @@ document.getElementById('signup-form').addEventListener('submit', function(e) {
             document.getElementById('auth-view').style.display = 'none';
             document.getElementById('signup-container').style.display = 'none';
             document.getElementById('app-view').style.display = 'block';
-            
+            document.querySelector('.bottom-nav').style.display = 'flex';
+
             // Update profile with current user data
             document.querySelector('.profile-stat-count:nth-child(1)').textContent = currentUser.posts;
             document.querySelector('.profile-stat-count:nth-child(2)').textContent = currentUser.followers;
